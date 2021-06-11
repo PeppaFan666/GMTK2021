@@ -8,7 +8,9 @@ namespace GMTK2021
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-
+        int MaxEntityTypes;
+        int MaxNPCTypes;
+        Texture2D[] NpcTextures;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -26,7 +28,13 @@ namespace GMTK2021
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            MaxEntityTypes = 0;
+            MaxNPCTypes = 0;
+            NpcTextures = new Texture2D[MaxNPCTypes];
+            for(int i =0; i < MaxEntityTypes; i++)
+            {
+               NpcTextures[i] = Content.Load<Texture2D>("NPCs_" + i);
+            }
             // TODO: use this.Content to load your game content here
         }
 
