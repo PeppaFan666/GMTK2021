@@ -11,10 +11,14 @@ namespace GMTK2021
         public float roatation = 0f;
         public SpriteEffects spriteEffects = SpriteEffects.None;
         public float scale = 1f;
-       protected override void OnLoad()
+        public bool CustomSprite = false;
+        protected override void OnLoad()
         {
             SetDefaults();
-            sprite = Game1.instance.NpcTextures[Type];
+            if (CustomSprite)
+                CustomSpriteFind();
+            else
+                sprite = Game1.instance.NpcTextures[Type];
             center = Vector2.One;
         }
         public virtual void AI() { }
@@ -22,5 +26,6 @@ namespace GMTK2021
         {
             spriteBatch.Draw(sprite, center, null, color, roatation, Vector2.Zero,scale, spriteEffects, 0f);
         }
+        public virtual void CustomSpriteFind() { }
     }
 }

@@ -12,6 +12,7 @@ namespace GMTK2021
         int MaxNPCTypes;
        public Texture2D[] NpcTextures;
         public static Game1 instance;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
