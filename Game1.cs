@@ -10,12 +10,14 @@ namespace GMTK2021
         private SpriteBatch _spriteBatch;
         int MaxEntityTypes;
         int MaxNPCTypes;
-        Texture2D[] NpcTextures;
+       public Texture2D[] NpcTextures;
+        public static Game1 instance;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            instance = this;
         }
 
         protected override void Initialize()

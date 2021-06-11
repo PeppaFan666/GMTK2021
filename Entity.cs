@@ -2,11 +2,12 @@
 
 namespace GMTK2021
 {
-    class Entity
+   public class Entity
     {
-        Rectangle hitbox;
+       public Rectangle hitbox;
+       public Vector2 center;
         public virtual void SetDefaults() { }
-        public virtual void OnLoad() { }
+        protected virtual void OnLoad() { }
         public bool Colliding(Rectangle targethitbox)
         {
             return this.hitbox.Intersects(targethitbox);
