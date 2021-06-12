@@ -10,12 +10,15 @@ namespace GMTK2021
         private SpriteBatch _spriteBatch;
         int MaxEntityTypes;
         int MaxNPCTypes;
-        Texture2D[] NpcTextures;
+        public Texture2D[] NpcTextures;
+        public static Game1 instance;
+        private Paddle paddle;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            instance = this;
         }
 
         protected override void Initialize()
@@ -35,6 +38,9 @@ namespace GMTK2021
             {
                NpcTextures[i] = Content.Load<Texture2D>("NPCs_" + i);
             }
+            paddle = new Paddle(this);
+            paddle.LoadContent();
+            paddle.playerPosition = new Vector2(512, 512);
             // TODO: use this.Content to load your game content here
         }
 
@@ -42,16 +48,17 @@ namespace GMTK2021
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            paddle.Update(deltaTime);
 
             // TODO: Add your update logic here
-
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
+            paddle.Draw(_spriteBatch);
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
