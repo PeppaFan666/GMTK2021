@@ -6,11 +6,13 @@ namespace GMTK2021
     {
        public Rectangle hitbox;
        public Vector2 center;
+        public Vector2 velocity;
         public virtual void SetDefaults() { }
         protected virtual void OnLoad() { }
         public bool Colliding(Rectangle targethitbox)
         {
             return this.hitbox.Intersects(targethitbox);
         }
+        public virtual void OnCollide() { }
     }
 }

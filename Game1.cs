@@ -13,7 +13,9 @@ namespace GMTK2021
         public Texture2D[] NpcTextures;
         public static Game1 instance;
         private Paddle paddle;
-        private NPC npc;
+        int CurrentIndex = 0;
+        public NPC[] npc;
+        int MaxNPCs;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -43,7 +45,8 @@ namespace GMTK2021
             paddle.LoadContent();
             paddle.playerPosition = new Vector2(512, 512);
             paddle.SetHealth(100);
-            
+            MaxNPCs = 100;
+            npc = new NPC[MaxNPCs];
             // TODO: use this.Content to load your game content here
         }
 
@@ -53,8 +56,25 @@ namespace GMTK2021
                 Exit();
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             paddle.Update(deltaTime);
+            CurrentIndex = 0;
+            for (int i = 0; i < MaxNPCs; i++)
+            {
+                if (npc[i] != null)
+                {
+                    npc[i].AI();
+                    npc[i].center += npc[i].velocity;
+                    /* // if you want your npcs to collide with each other
+                    for (int j = 0; j < MaxNPCs; j++)
+                    {
+                        if (npc[i].Colliding(npc[j].hitbox))
+                        {
+                            npc[i].OnCollide();
+                        }
+                            }
+                    */
+                }
+            }
 
-            // TODO: Add your update logic here
             base.Update(gameTime);
         }
 
@@ -62,8 +82,11 @@ namespace GMTK2021
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             paddle.Draw(_spriteBatch);
-            // TODO: Add your drawing code here
-
+            for (int i = 0; i < MaxNPCs; i++)
+            {
+                if (npc[i] != null)
+                    npc[i].Draw(_spriteBatch);
+            }
             base.Draw(gameTime);
         }
     }
