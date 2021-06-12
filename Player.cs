@@ -16,6 +16,7 @@ namespace GMTK2021
         public Vector2 playerPosition = Vector2.Zero;
         public Point playerFrameSize = new Point(16, 16);
         public int actualHealth;
+        public bool Invincible;
 
         public GameObject(Game ggame)
         {
@@ -59,12 +60,29 @@ namespace GMTK2021
         }
         public void Hit(int damage)
         {
-            actualHealth -= damage;
-            fullWidth -= damage;
+            if (!Invincible)
+            {
+                actualHealth -= damage;
+                fullWidth -= damage;
+                IFrames();
+            }
+            
         }
         public void Kill()
         {
             actualHealth = 0;
+        }
+        public void IFrames()
+        {
+            int i = 0;
+            Invincible = true;
+            i++;
+            if (i == 30)
+            {
+                Invincible = false;
+                i = 0;
+                return;
+            }
         }
     }
 }
