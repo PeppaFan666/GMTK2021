@@ -13,6 +13,7 @@ namespace GMTK2021
         public Texture2D[] NpcTextures;
         public static Game1 instance;
         private Paddle paddle;
+        private NPC npc;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -41,6 +42,8 @@ namespace GMTK2021
             paddle = new Paddle(this);
             paddle.LoadContent();
             paddle.playerPosition = new Vector2(512, 512);
+            paddle.SetHealth(100);
+            
             // TODO: use this.Content to load your game content here
         }
 
