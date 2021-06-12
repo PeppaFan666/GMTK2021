@@ -12,6 +12,7 @@ namespace GMTK2021
         public SpriteEffects spriteEffects = SpriteEffects.None;
         public float scale = 1f;
         public bool CustomSprite = false;
+
         protected override void OnLoad()
         {
             SetDefaults();
